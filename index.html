@@ -19,6 +19,29 @@
             bottom: 0;
             width: 100%;
         }
+
+        .marker {
+            background-image: url('relax-icon.png');
+            background-size: cover;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .mapboxgl-popup {
+            max-width: 200px;
+        }
+
+        .mapboxgl-popup-content {
+            text-align: center;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .popup-content {
+            max-width: 300px;
+            font-family: 'Open Sans', sans-serif;
+        }
     </style>
 </head>
 
@@ -39,29 +62,43 @@
         });
 
         map.on('load', function () {
-            map.addSource('Westland', {
+            map.addSource('delivery-radius', {
                 type: 'geojson',
-                data: './Westland.geojson'
+                data: './delivery-radius.geojson'
             });
 
             // add markers
             map.addLayer({
-                id: 'Westland',
-                type: 'line',
-                source: 'Westland',
+                id: 'delivery-radius',
+                type: 'fill',
+                source: 'delivery-radius',
                 paint: {
-                    'line-color': 'cyan',
-                    'line-width': 5,
+                    'fill-color': 'cyan',
+                    'fill-opacity': 0.2,
                 },
             })
-        })
+        });
+
+        var el = document.createElement('div');
+        el.className = 'marker';
+
+        // make a marker for each feature and add it to the map
+        new mapboxgl.Marker(el)
+            .setLngLat([-83.3868674, 42.3339423])
+            .setPopup(
+                new mapboxgl.Popup({ offset: 25 }) // add popups
+                    .setHTML(
+                        `<h3>Relax</h3>`
+                    )
+            )
+            .addTo(map);
+
 
         map.on('load', function () {
             map.addSource('Competitors', {
                 type: 'geojson',
                 data: './Competitors.geojson'
             });
-
             // add markers
             map.addLayer({
                 id: 'Competitors',
@@ -69,16 +106,15 @@
                 source: 'Competitors',
                 paint: {
                     'circle-color': 'cyan',
-                    'circle-radius': 8
                 },
             })
 
             map.on('click', 'Competitors', (e) => {
-            new mapboxgl.Popup()
-                .setLngLat(e.lngLat)
-                .setHTML(e.features[0].properties.Name)
-                .addTo(map);
-        });
+                new mapboxgl.Popup()
+                    .setLngLat(e.lngLat)
+                    .setHTML(e.features[0].properties.Name)
+                    .addTo(map);
+            });
         })
 
         map.on('load', function () {
@@ -99,14 +135,24 @@
             })
 
             map.on('click', 'Customers', (e) => {
-            new mapboxgl.Popup()
-                .setLngLat(e.lngLat)
-                .setHTML(e.features[0].properties.Name)
-                .addTo(map);
-        });
-        })
+                var a = e.features[0];
+                    console.log(a);
 
-      
+                let popupContent = `<div class="popup-content"> 
+                       <div>${e.features[0].properties.Name}</div>
+                       <div>${e.features[0].properties.City}</div>
+                       <div>${e.features[0].properties.Delivery_Radius}</div>
+                       <div>${e.features[0].properties.Total_Units}</div>
+                </div>`;
+                new mapboxgl.Popup()
+                    .setLngLat(e.lngLat)
+                    .setHTML(popupContent)
+                    .addTo(map);
+            });
+        });
+        
+
+
 
         map.addControl(new mapboxgl.NavigationControl());
         map.addControl(

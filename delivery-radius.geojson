@@ -1,0 +1,75 @@
+{
+    "type": "FeatureCollection",
+    "name": "delivery-radius",
+    "crs": {
+        "type": "name",
+        "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+        }
+    },
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Delivery Radius",
+                "description": null,
+                "timestamp": null,
+                "begin": null,
+                "end": null,
+                "altitudeMode": null,
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1,
+                "drawOrder": null,
+                "icon": null
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            -83.4738389,
+                            42.375973,
+                            0.0
+                        ],
+                        [
+                            -83.4707481,
+                            42.3104856,
+                            0.0
+                        ],
+                        [
+                            -83.3624003,
+                            42.3132791,
+                            0.0
+                        ],
+                        [
+                            -83.3651476,
+                            42.3719137,
+                            0.0
+                        ],
+                        [
+                            -83.434346,
+                            42.370011,
+                            0.0
+                        ],
+                        [
+                            -83.4587286,
+                            42.3695034,
+                            0.0
+                        ],
+                        [
+                            -83.459072,
+                            42.3766072,
+                            0.0
+                        ],
+                        [
+                            -83.4738389,
+                            42.375973,
+                            0.0
+                        ]
+                    ]
+                ]
+            }
+        }
+    ]
+}
