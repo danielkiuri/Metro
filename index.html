@@ -42,6 +42,11 @@
             max-width: 300px;
             font-family: 'Open Sans', sans-serif;
         }
+
+        .popup-content img  {
+            width: 100%;
+        }
+
     </style>
 </head>
 
@@ -129,17 +134,19 @@
                 type: 'circle',
                 source: 'Customers',
                 paint: {
-                    'circle-color': 'red',
-                    'circle-radius': 8
+                    'circle-color': 'rgb(143, 0, 255)',
+                    'circle-radius': 8,
+                    'circle-opacity': 0.5
                 },
             })
 
             map.on('click', 'Customers', (e) => {
                 var a = e.features[0];
-                    console.log(a);
+                console.log(a);
 
                 let popupContent = `<div class="popup-content"> 
                        <div>${e.features[0].properties.Name}</div>
+                       <div>${e.features[0].properties.description}</div>
                        <div>${e.features[0].properties.City}</div>
                        <div>${e.features[0].properties.Delivery_Radius}</div>
                        <div>${e.features[0].properties.Total_Units}</div>
@@ -150,7 +157,7 @@
                     .addTo(map);
             });
         });
-        
+
 
 
 
